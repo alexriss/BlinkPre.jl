@@ -1,6 +1,6 @@
 __precompile__()
 
-module Blink
+module BlinkPre
 
 using Reexport
 using Distributed: Future
@@ -18,3 +18,9 @@ export AtomShell
 import .AtomShell: resolve_blink_asset
 
 end # module
+
+
+# Blink.jl -> BlinkPre.jl
+# replace module name
+# replace all references of `Blink` with `BlinkPre` across all files
+# also in the js files

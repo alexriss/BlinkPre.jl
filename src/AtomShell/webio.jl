@@ -5,10 +5,10 @@ end
 
 function initwebio!(w::Window)
     if isdefined(WebIO, :BlinkConnection)
-        # Older versions of WebIO have their own setup logic for Blink.
+        # Older versions of WebIO have their own setup logic for BlinkPre.
         # Let's avoid conflicts.
         Base.depwarn(
-            "Please upgrade WebIO for a smoother integration with Blink.",
+            "Please upgrade WebIO for a smoother integration with BlinkPre.",
             :blink_webio_upgrade
         )
         return
@@ -17,9 +17,9 @@ function initwebio!(w::Window)
     @js w begin
         WebIO = window.WebIO = @new webio.default();
         WebIO.setSendCallback(function (message)
-            window.Blink.msg("webio", message)
+            window.BlinkPre.msg("webio", message)
         end)
-        Blink.handlers.webio = function (message)
+        BlinkPre.handlers.webio = function (message)
             window.WebIO.dispatch(message.data)
         end
     end

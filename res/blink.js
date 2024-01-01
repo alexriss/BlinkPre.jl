@@ -1,6 +1,6 @@
 (function() {
 
-  Blink = {};
+  BlinkPre= {};
 
   // Comms stuff
 
@@ -13,15 +13,15 @@
     var msg = (m === undefined) ?
       { type: t.type, data: t } :
       { type: t, data: m }
-    Blink.sock.send(JSON.stringify(msg))
+    BlinkPre.sock.send(JSON.stringify(msg))
   }
 
 
   function connect() {
-    Blink.sock = new WebSocket(ws);
-    Blink.sock.onmessage = onmessage;
-    Blink.sock.onclose = function() {
-      if (Blink.sock.readyState == 3) {
+    BlinkPre.sock = new WebSocket(ws);
+    BlinkPre.sock.onmessage = onmessage;
+    BlinkPre.sock.onclose = function() {
+      if (BlinkPre.sock.readyState == 3) {
         setTimeout(connect, 500);
       }
     }
@@ -56,9 +56,9 @@
       });
   }
 
-  Blink.msg = msg;
-  Blink.cb = cb;
-  Blink.handlers = handlers;
+  BlinkPre.msg = msg;
+  BlinkPre.cb = cb;
+  BlinkPre.handlers = handlers;
   connect();
 
   // JS eval
@@ -85,8 +85,8 @@
     });
   }
 
-  Blink.evalwith = evalwith;
-  Blink.evalscripts = evalscripts;
+  BlinkPre.evalwith = evalwith;
+  BlinkPre.evalscripts = evalscripts;
 
   // HTML utils
 
@@ -131,7 +131,7 @@
     if (resolve) resolve(true);
   }
 
-  Blink.fill = fill;
+  BlinkPre.fill = fill;
 
   // JS Utils
 
@@ -155,10 +155,10 @@
     };
   }
 
-  Blink.click = click;
+  BlinkPre.click = click;
 
   // Window creation callback: Mark this window as done loading.
   if (typeof callback_id !== 'undefined') {
-    Blink.sock.onopen = ()=>{ cb(callback_id, true); }
+    BlinkPre.sock.onopen = ()=>{ cb(callback_id, true); }
   }
 })();

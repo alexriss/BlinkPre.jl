@@ -11,7 +11,7 @@ run_rdr(cmd; kw...) = run(cmd, Base.spawn_opts_inherit()...; kw...)
 Find a file, expressed as a relative path from the Blink package
 folder. Example:
 
-  resolve_blink_asset("src", "Blink.jl") -> /home/<user>/.julia/v0.6/Blink/src/Blink.jl
+  resolve_blink_asset("src", "BlinkPre.jl") -> /home/<user>/.julia/v0.6/Blink/src/BlinkPre.jl
 """
 resolve_blink_asset(path...) = abspath(joinpath(@__DIR__, "..", "..", path...))
 
@@ -96,7 +96,7 @@ end
 
 # JS Communication
 
-import ..Blink: msg, enable_callbacks!, handlers, handle_message, active
+import ..BlinkPre: msg, enable_callbacks!, handlers, handle_message, active
 
 msg(shell::Electron, m) = (JSON.print(shell.sock, m); println(shell.sock))
 

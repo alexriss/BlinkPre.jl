@@ -2,11 +2,11 @@ export body!, content!, loadcss!, loadjs!, load!, importhtml!
 
 function content!(o, sel, html::AbstractString; fade = true, async = true)
   if async
-    @js_(o, Blink.fill($sel, $html, $fade, null, null))
+    @js_(o, BlinkPre.fill($sel, $html, $fade, null, null))
   else
     @js o begin  # Use `@js` to wait until the below Promise is resolved.
       @new Promise(function (resolve, reject)
-        Blink.fill($sel, $html, $fade, resolve, reject)
+        BlinkPre.fill($sel, $html, $fade, resolve, reject)
       end)
     end
     return o  # But still return `o` for chaining.

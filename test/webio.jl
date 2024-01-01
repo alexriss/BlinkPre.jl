@@ -1,5 +1,5 @@
 using Test
-using Blink
+using BlinkPre
 using WebIO
 
 """
@@ -49,7 +49,7 @@ end
         w = Window(Dict(:show => false); body=scope)
 
         # Sleep to allow WebIO scope to mount in Electron
-        sleep(0.25)
+        sleep(1.25)
 
         @js w document.querySelector("#mybutton").click()
         did_click = with_timeout(() -> take!(obschannel), 5)

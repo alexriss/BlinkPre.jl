@@ -1,5 +1,5 @@
-using ..Blink
-import Blink: js, id, stopserve
+using ..BlinkPre
+import BlinkPre: js, id, stopserve
 import JSExpr: JSString, jsstring
 import Base: position, size, close
 
@@ -52,8 +52,8 @@ function Window(a::Shell, opts::AbstractDict = Dict(); async=false, body=nothing
 end
 
 function Window(a::Shell, content::Page, opts::AbstractDict = Dict(); async=false, body=nothing)
-  id, callback_cond = Blink.callback!()
-  url = Blink.localurl(content) * "?callback=$id"
+  id, callback_cond = BlinkPre.callback!()
+  url = BlinkPre.localurl(content) * "?callback=$id"
 
   # Create the window.
   opts = merge(opts, Dict(:url => url))

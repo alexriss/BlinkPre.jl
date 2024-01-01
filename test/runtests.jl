@@ -1,4 +1,4 @@
-using Blink
+using BlinkPre
 using Test
 using Sockets
 
@@ -6,15 +6,15 @@ using Sockets
 # unknown reasons.
 
 # open window and wait for it to initialize
-w = Window(Blink.Dict(:show => false), async=false);
+w = Window(BlinkPre.Dict(:show => false), async=false);
 @testset "basic functionality" begin
     # make sure the window is really active
     @test @js(w, Math.log(10)) ≈ log(10)
 
-    @test string(Blink.jsstring(:(Dict("a" => 1, :b => 10)))...) == "{\"a\":1,\"b\":10}"
+    @test string(BlinkPre.jsstring(:(Dict("a" => 1, :b => 10)))...) == "{\"a\":1,\"b\":10}"
 
     # check that <!DOCTYPE html> was declared
-    @test startswith(Blink.maintp.tokens[1].value, "<!DOCTYPE html>")
+    @test startswith(BlinkPre.maintp.tokens[1].value, "<!DOCTYPE html>")
 end
 
 include("content/api.jl");
